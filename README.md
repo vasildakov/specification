@@ -1,2 +1,2 @@
-# specification
-specification design pattern
+# PHP Specification Design Pattern
+

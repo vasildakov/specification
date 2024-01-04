@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="4" assertions="5" errors="0" warnings="0" failures="0" skipped="0" time="0.008603">
-    <testsuite name="Speedy Test Suite" tests="4" assertions="5" errors="0" warnings="0" failures="0" skipped="0" time="0.008603">
-      <testsuite name="Vasildakov\SpecificationTests\CompositeSpecificationTest" file="/Users/vasdakov/Dev/vasildakov/specification/tests/CompositeSpecificationTest.php" tests="4" assertions="5" errors="0" warnings="0" failures="0" skipped="0" time="0.008603">
-        <testcase name="testItCanBeCreated" class="Vasildakov\SpecificationTests\CompositeSpecificationTest" classname="Vasildakov.SpecificationTests.CompositeSpecificationTest" file="/Users/vasdakov/Dev/vasildakov/specification/tests/CompositeSpecificationTest.php" line="11" assertions="2" time="0.007506"/>
-        <testcase name="testItCanAddSpecifications" class="Vasildakov\SpecificationTests\CompositeSpecificationTest" classname="Vasildakov.SpecificationTests.CompositeSpecificationTest" file="/Users/vasdakov/Dev/vasildakov/specification/tests/CompositeSpecificationTest.php" line="19" assertions="1" time="0.000398"/>
-        <testcase name="testItBeSatisfiedWhenAllSpecsAreSatisfied" class="Vasildakov\SpecificationTests\CompositeSpecificationTest" classname="Vasildakov.SpecificationTests.CompositeSpecificationTest" file="/Users/vasdakov/Dev/vasildakov/specification/tests/CompositeSpecificationTest.php" line="34" assertions="1" time="0.000414"/>
-        <testcase name="testItWontSatisfiedIfOneSpecIsNoySatisfied" class="Vasildakov\SpecificationTests\CompositeSpecificationTest" classname="Vasildakov.SpecificationTests.CompositeSpecificationTest" file="/Users/vasdakov/Dev/vasildakov/specification/tests/CompositeSpecificationTest.php" line="56" assertions="1" time="0.000286"/>
+  <testsuite name="" tests="4" assertions="6" errors="0" warnings="0" failures="0" skipped="0" time="0.004954">
+    <testsuite name="Speedy Test Suite" tests="4" assertions="6" errors="0" warnings="0" failures="0" skipped="0" time="0.004954">
+      <testsuite name="Vasildakov\SpecificationTests\SpecificationChainTest" file="/Users/vasdakov/Dev/vasildakov/specification/tests/SpecificationChainTest.php" tests="4" assertions="6" errors="0" warnings="0" failures="0" skipped="0" time="0.004954">
+        <testcase name="testItCanBeCreated" class="Vasildakov\SpecificationTests\SpecificationChainTest" classname="Vasildakov.SpecificationTests.SpecificationChainTest" file="/Users/vasdakov/Dev/vasildakov/specification/tests/SpecificationChainTest.php" line="13" assertions="2" time="0.003549"/>
+        <testcase name="testItCanAddSpecifications" class="Vasildakov\SpecificationTests\SpecificationChainTest" classname="Vasildakov.SpecificationTests.SpecificationChainTest" file="/Users/vasdakov/Dev/vasildakov/specification/tests/SpecificationChainTest.php" line="21" assertions="2" time="0.000414"/>
+        <testcase name="testItBeSatisfiedWhenAllSpecsAreSatisfied" class="Vasildakov\SpecificationTests\SpecificationChainTest" classname="Vasildakov.SpecificationTests.SpecificationChainTest" file="/Users/vasdakov/Dev/vasildakov/specification/tests/SpecificationChainTest.php" line="40" assertions="1" time="0.000718"/>
+        <testcase name="testItWontSatisfiedIfOneSpecIsNoySatisfied" class="Vasildakov\SpecificationTests\SpecificationChainTest" classname="Vasildakov.SpecificationTests.SpecificationChainTest" file="/Users/vasdakov/Dev/vasildakov/specification/tests/SpecificationChainTest.php" line="49" assertions="1" time="0.000273"/>
       </testsuite>
     </testsuite>
   </testsuite>
