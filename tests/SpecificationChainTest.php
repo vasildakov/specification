@@ -76,6 +76,18 @@ final class SpecificationChainTest extends TestCase
             public function getGender(): string {
                 return $this->gender;
             }
+
+            public function isMale(): bool {
+                return $this->getGender() == 'Male';
+            }
+
+            public function isFemale(): bool {
+                return $this->getGender() == 'Female';
+            }
+
+            public function isAdult(): bool {
+                return $this->getAge() >= 18;
+            }
         };
     }
 }
