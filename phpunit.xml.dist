@@ -8,7 +8,7 @@
     </include>
   </coverage>
   <testsuites>
-    <testsuite name="Speedy Test Suite">
+    <testsuite name="Specification Test Suite">
       <directory>./tests</directory>
     </testsuite>
   </testsuites>
