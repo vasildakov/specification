@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vasildakov\Specification;
 
 use Countable;
@@ -10,36 +12,40 @@ use Traversable;
 class SpecificationChain implements Countable, IteratorAggregate, SpecificationInterface
 {
     /**
-     * @var array<SpecificationInterface>
+     * @var SpecificationCollection
      */
-    private array $specifications = [];
+    private SpecificationCollection $specifications;
 
+    public function __construct(SpecificationCollection $specifications)
+    {
+        $this->specifications = $specifications;
+    }
 
     public function count(): int
     {
         return count($this->specifications);
     }
 
-    public function getSpecifications(): array
+    public function getSpecifications(): SpecificationCollection
     {
         return $this->specifications;
     }
 
     public function addSpecification(SpecificationInterface $specification): void
     {
-        $this->specifications[] = $specification;
+        $this->specifications->add($specification);
     }
 
     /**
      * Returns true only if all specifications are satisfied
-     * @param object $candidate
+     * @param object $object
      * @return bool
      */
-    public function isSatisfiedBy(object $candidate): bool
+    public function isSatisfiedBy(object $object): bool
     {
         $result = true;
-        foreach( $this->specifications as $specification) {
-            if ($specification->isSatisfiedBy($candidate)) {
+        foreach ($this->specifications as $specification) {
+            if ($specification->isSatisfiedBy($object)) {
                 continue;
             }
             $result = false;
@@ -50,6 +56,6 @@ class SpecificationChain implements Countable, IteratorAggregate, SpecificationI
 
     public function getIterator(): Traversable
     {
-        return new ArrayIterator($this->specifications);
+        return $this->specifications->getIterator();
     }
 }

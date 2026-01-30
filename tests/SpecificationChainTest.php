@@ -2,92 +2,136 @@
 
 namespace Vasildakov\SpecificationTests;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Vasildakov\Specification\SpecificationChain;
+use Vasildakov\Specification\SpecificationCollection;
+use Vasildakov\Specification\SpecificationCollectionIterator;
 use Vasildakov\Specification\SpecificationInterface;
 use Vasildakov\Specification\UserInterface;
 use Vasildakov\Specification\UserSpecificationFactory;
+use Vasildakov\SpecificationTests\Assets\BoolSpecification;
 
 final class SpecificationChainTest extends TestCase
 {
-    public function testItCanBeCreated(): void
+    #[Test]
+    public function itCanBeCreated(): void
     {
-        $chain = new SpecificationChain();
+        $collection = SpecificationCollection::fromArray([
+            new BoolSpecification(true),
+        ]);
 
-        self::assertInstanceOf(SpecificationChain::class, $chain);
-        self::assertInstanceOf(SpecificationInterface::class, $chain);
+        $chain = new SpecificationChain($collection);
+
+        $this->assertInstanceOf(SpecificationChain::class, $chain);
+        $this->assertInstanceOf(SpecificationInterface::class, $chain);
     }
 
-    public function testItCanAddSpecifications(): void
+    #[Test]
+    public function itCanAddSpecifications(): void
     {
-        $chain = new SpecificationChain();
+        $collection = SpecificationCollection::fromArray([]);
+        $chain = new SpecificationChain($collection);
 
-        // initially the chain is empty
-        self::assertCount(0, $chain->getSpecifications());
+        // Assert it starts empty
+        $this->assertCount(0, $chain);
 
-        $chain->addSpecification(
-            new class implements SpecificationInterface {
-                public function isSatisfiedBy(object $candidate): bool {
-                    return true;
-                }
+        // Then add specifications
+        $spec = new class implements SpecificationInterface {
+            public function isSatisfiedBy(object $object): bool
+            {
+                return true;
             }
-        );
+        };
 
-        // the chain should have only one spec
-        self::assertCount(1, $chain->getSpecifications());
+        $chain->addSpecification($spec);
+        $this->assertCount(1, $chain);
     }
 
+    #[Test]
     public function testItBeSatisfiedWhenAllSpecsAreSatisfied(): void
     {
         $candidate = self::candidateFactory(country: 'Bulgaria', age: 49, gender: 'Male');
 
         $chain = (new UserSpecificationFactory())($candidate);
 
-        self::assertTrue($chain->isSatisfiedBy($candidate));
+        $this->assertTrue($chain->isSatisfiedBy($candidate));
     }
 
+    #[Test]
     public function testItWontSatisfiedIfOneSpecIsNoySatisfied(): void
     {
         $candidate = self::candidateFactory(country: 'Germany', age: 25, gender: 'Female');
 
         $chain = (new UserSpecificationFactory())($candidate);
 
-        self::assertFalse($chain->isSatisfiedBy($candidate));
+        $this->assertFalse($chain->isSatisfiedBy($candidate));
     }
 
 
     private static function candidateFactory(string $country, int $age, string $gender): UserInterface
     {
-        return new class($country, $age, $gender) implements UserInterface {
+        return new readonly class ($country, $age, $gender) implements UserInterface {
             public function __construct(
-                private readonly string $country,
-                private readonly int $age,
-                private readonly string $gender
-            ) {}
+                private string $country,
+                private int $age,
+                private string $gender
+            ) {
+            }
 
-            public function getCountry(): string {
+            public function getCountry(): string
+            {
                 return $this->country;
             }
 
-            public function getAge(): int {
+            public function getAge(): int
+            {
                 return $this->age;
             }
 
-            public function getGender(): string {
+            public function getGender(): string
+            {
                 return $this->gender;
             }
 
-            public function isMale(): bool {
+            public function isMale(): bool
+            {
                 return $this->getGender() == 'Male';
             }
 
-            public function isFemale(): bool {
+            public function isFemale(): bool
+            {
                 return $this->getGender() == 'Female';
             }
 
-            public function isAdult(): bool {
+            public function isAdult(): bool
+            {
                 return $this->getAge() >= 18;
             }
         };
+    }
+
+    #[Test]
+    public function itCanReturnCollectionIterator(): void
+    {
+        $collection = SpecificationCollection::fromArray([
+            new BoolSpecification(true),
+        ]);
+
+        $chain = new SpecificationChain($collection);
+
+        $this->assertInstanceOf(SpecificationCollectionIterator::class, $chain->getIterator());
+    }
+
+    #[Test]
+    public function itCanGetAllSpecification(): void
+    {
+        $collection = SpecificationCollection::fromArray([
+            new BoolSpecification(true),
+        ]);
+
+        $chain = new SpecificationChain($collection);
+
+        $this->assertCount(1, $chain->getSpecifications());
     }
 }

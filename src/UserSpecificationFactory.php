@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vasildakov\Specification;
 
 /**
@@ -21,13 +23,16 @@ final class UserSpecificationFactory
      */
     public function __invoke(object $candidate): SpecificationChain
     {
-        $chain = new SpecificationChain();
+        $collection = SpecificationCollection::fromArray([]);
+
+        $chain = new SpecificationChain($collection);
 
         // add age specification
         $chain->addSpecification(
             new class implements SpecificationInterface {
-                public function isSatisfiedBy(object $candidate): bool {
-                    return $candidate->getAge() >= 18;
+                public function isSatisfiedBy(object $object): bool
+                {
+                    return $object->getAge() >= 18;
                 }
             }
         );
@@ -35,8 +40,9 @@ final class UserSpecificationFactory
         // add country specification
         $chain->addSpecification(
             new class implements SpecificationInterface {
-                public function isSatisfiedBy(object $candidate): bool {
-                    return $candidate->getCountry() == 'Bulgaria';
+                public function isSatisfiedBy(object $object): bool
+                {
+                    return $object->getCountry() == 'Bulgaria';
                 }
             }
         );
@@ -44,8 +50,9 @@ final class UserSpecificationFactory
         // add gender specification
         $chain->addSpecification(
             new class implements SpecificationInterface {
-                public function isSatisfiedBy(object $candidate): bool {
-                    return $candidate->getGender() == 'Male';
+                public function isSatisfiedBy(object $object): bool
+                {
+                    return $object->getGender() == 'Male';
                 }
             }
         );

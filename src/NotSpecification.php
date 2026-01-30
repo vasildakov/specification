@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vasildakov\Specification;
 
 /**
@@ -26,7 +28,7 @@ final class NotSpecification extends Specification
      */
     public function isSatisfiedBy($object): bool
     {
-        return !$this->specification->isSatisfiedBy($object);
+        return ! $this->specification->isSatisfiedBy($object);
     }
 
     /**
