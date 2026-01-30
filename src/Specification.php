@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Vasildakov\Specification;
 
 /**
- * @template T
+ * @template T of object
  */
 abstract class Specification implements SpecificationInterface
 {
     /**
-     * @param object $object
+     * @param T $object
      * @return bool
      */
     abstract public function isSatisfiedBy(object $object): bool;

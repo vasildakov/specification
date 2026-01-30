@@ -11,20 +11,20 @@ namespace Vasildakov\Specification;
 final class OrSpecification extends Specification
 {
     /**
-     * @var Specification<T>
+     * @var SpecificationInterface<T>
      */
-    private Specification $one;
+    private SpecificationInterface $one;
 
     /**
-     * @var Specification<T>
+     * @var SpecificationInterface<T>
      */
-    private Specification $other;
+    private SpecificationInterface $other;
 
     /**
-     * @param Specification<T> $one
-     * @param Specification<T> $other
+     * @param SpecificationInterface<T> $one
+     * @param SpecificationInterface<T> $other
      */
-    public function __construct(Specification $one, Specification $other)
+    public function __construct(SpecificationInterface $one, SpecificationInterface $other)
     {
         $this->one   = $one;
         $this->other = $other;
@@ -39,19 +39,18 @@ final class OrSpecification extends Specification
     }
 
     /**
-     * @return Specification<T>
+     * @return SpecificationInterface<T>
      */
-    public function one(): Specification
+    public function one(): SpecificationInterface
     {
         return $this->one;
     }
 
     /**
-     * @return Specification<T>
+     * @return SpecificationInterface<T>
      */
-    public function other(): Specification
+    public function other(): SpecificationInterface
     {
         return $this->other;
     }
-
 }

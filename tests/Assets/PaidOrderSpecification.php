@@ -1,13 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vasildakov\SpecificationTests\Assets;
 
 use Vasildakov\Specification\Specification;
 
-class PaidOrderSpecification extends Specification
+/**
+ * @extends Specification<Order>
+ */
+final class PaidOrderSpecification extends Specification
 {
-    public function isSatisfiedBy($order): bool
+    public function isSatisfiedBy(object $object): bool
     {
-        return $order->isPaid();
+        assert($object instanceof Order);
+        return $object->isPaid();
     }
 }

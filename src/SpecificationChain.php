@@ -21,6 +21,16 @@ class SpecificationChain implements Countable, IteratorAggregate, SpecificationI
         $this->specifications = $specifications;
     }
 
+    public static function fromCollection(SpecificationCollection $specifications): self
+    {
+        return new self($specifications);
+    }
+
+    public static function fromArray(array $specifications): self
+    {
+        return new self(SpecificationCollection::fromArray($specifications));
+    }
+
     public function count(): int
     {
         return count($this->specifications);
@@ -38,6 +48,7 @@ class SpecificationChain implements Countable, IteratorAggregate, SpecificationI
 
     /**
      * Returns true only if all specifications are satisfied
+     *
      * @param object $object
      * @return bool
      */

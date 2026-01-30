@@ -1,17 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vasildakov\SpecificationTests\Assets;
 
 use InvalidArgumentException;
 use Vasildakov\Specification\Specification;
 
-class UnshippedOrderSpecification extends Specification
+/**
+ * @extends Specification<Order>
+ */
+final class UnshippedOrderSpecification extends Specification
 {
     public function isSatisfiedBy(object $object): bool
     {
-        if ( !$object instanceof Order) {
-            throw new InvalidArgumentException();
-        }
-        return !$object->isShipped();
+        assert($object instanceof Order);
+        return ! $object->isShipped();
     }
 }

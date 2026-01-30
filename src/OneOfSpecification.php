@@ -11,14 +11,14 @@ namespace Vasildakov\Specification;
 final class OneOfSpecification extends Specification
 {
     /**
-     * @var Specification<T>[]
+     * @var SpecificationInterface<T>[]
      */
     private array $specifications;
 
     /**
-     * @param Specification<T> ...$specifications
+     * @param SpecificationInterface<T> ...$specifications
      */
-    public function __construct(Specification ...$specifications)
+    public function __construct(SpecificationInterface ...$specifications)
     {
         $this->specifications = $specifications;
     }
@@ -38,7 +38,7 @@ final class OneOfSpecification extends Specification
     }
 
     /**
-     * @return Specification<T>[]
+     * @return SpecificationInterface<T>[]
      */
     public function specifications(): array
     {

@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace Vasildakov\SpecificationTests;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Vasildakov\Specification\SpecificationCollection;
 use Vasildakov\Specification\SpecificationInterface;
 use Vasildakov\SpecificationTests\Assets\BoolSpecification;
 
-class SpecificationCollectionTest extends TestCase
+#[CoversClass(SpecificationCollection::class)]
+final class SpecificationCollectionTest extends TestCase
 {
+    #[Test]
     public function testItCanBeCreated(): void
     {
         $array = [new BoolSpecification(true)];
@@ -19,6 +23,7 @@ class SpecificationCollectionTest extends TestCase
         $this->assertInstanceOf(SpecificationCollection::class, $collection);
     }
 
+    #[Test]
     public function testItCanBeCounted(): void
     {
         $array = [
@@ -30,6 +35,7 @@ class SpecificationCollectionTest extends TestCase
         $this->assertCount(2, $collection);
     }
 
+    #[Test]
     public function testItCanBeIterated(): void
     {
         $array = [
@@ -42,6 +48,7 @@ class SpecificationCollectionTest extends TestCase
         }
     }
 
+    #[Test]
     public function testItCanAddSpecification(): void
     {
         $array = [

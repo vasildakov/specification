@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vasildakov\SpecificationTests;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Vasildakov\Specification\SpecificationChain;
@@ -12,6 +15,7 @@ use Vasildakov\Specification\UserInterface;
 use Vasildakov\Specification\UserSpecificationFactory;
 use Vasildakov\SpecificationTests\Assets\BoolSpecification;
 
+#[CoversClass(SpecificationChain::class)]
 final class SpecificationChainTest extends TestCase
 {
     #[Test]
@@ -134,4 +138,42 @@ final class SpecificationChainTest extends TestCase
 
         $this->assertCount(1, $chain->getSpecifications());
     }
+
+    #[Test]
+    public function fromCollectionCreatesInstance(): void
+    {
+        $collection = SpecificationCollection::fromArray([
+            new BoolSpecification(true),
+        ]);
+
+        $chain = SpecificationChain::fromCollection($collection);
+
+        $this->assertInstanceOf(SpecificationChain::class, $chain);
+        $this->assertCount(1, $chain->getSpecifications());
+    }
+
+    #[Test]
+    public function fromArrayCreatesInstance(): void
+    {
+        $specifications = [
+            new BoolSpecification(true),
+            new BoolSpecification(false),
+        ];
+
+        $chain = SpecificationChain::fromArray($specifications);
+
+        $this->assertInstanceOf(SpecificationChain::class, $chain);
+        $this->assertCount(2, $chain->getSpecifications());
+    }
+
+    #[Test]
+    public function fromArrayHandlesEmptyArray(): void
+    {
+        $chain = SpecificationChain::fromArray([]);
+
+        $this->assertInstanceOf(SpecificationChain::class, $chain);
+        $this->assertCount(0, $chain->getSpecifications());
+    }
+
+
 }

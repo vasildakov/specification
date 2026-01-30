@@ -1,3 +1,6 @@
 /build/
 /vendor/
 .idea
+data/cache
+.env
+build/

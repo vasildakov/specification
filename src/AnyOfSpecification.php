@@ -29,7 +29,7 @@ final class AnyOfSpecification extends Specification
     public function isSatisfiedBy($object): bool
     {
         foreach ($this->specifications() as $specification) {
-            if (!$specification->isSatisfiedBy($object)) {
+            if (! $specification->isSatisfiedBy($object)) {
                 return false;
             }
         }
