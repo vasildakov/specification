@@ -1,5 +1,8 @@
 # PHP Specification Design Pattern
 
+
+[![build](https://github.com/vasildakov/specification/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/vasildakov/mezzio-doctrine/actions/workflows/ci.yml)
+[![Coverage Status](https://coveralls.io/repos/github/vasildakov/specification/badge.svg?branch=main)](https://coveralls.io/github/vasildakov/specification?branch=main)
 ## Specification
 
 > The central idea of Specification is to separate the statement of how to match a candidate, from the
@@ -104,9 +107,9 @@ $chain = SpecificationChain::fromArray([
 // Check if user satisfies all specifications
 $user = new User(
     age: 25,
-    country: 'UK',
+    country: 'Bulgaria',
     gender: 'Male',
-    email: 'john.doe@example.co.uk',
+    email: 'john.doe@example.bg',
     active: true
 );
 
