@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vasildakov\Specification;
+namespace VasilDakov\Specification;
 
 /**
  * @template T
@@ -29,13 +29,5 @@ final class NotSpecification extends Specification
     public function isSatisfiedBy($object): bool
     {
         return ! $this->specification->isSatisfiedBy($object);
-    }
-
-    /**
-     * @return Specification<T>
-     */
-    public function specification(): Specification
-    {
-        return $this->specification;
     }
 }

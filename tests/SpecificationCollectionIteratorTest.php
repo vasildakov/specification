@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Vasildakov\SpecificationTests;
+namespace VasilDakov\SpecificationTests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Vasildakov\Specification\SpecificationCollection;
-use Vasildakov\Specification\SpecificationCollectionIterator;
-use Vasildakov\Specification\SpecificationInterface;
+use VasilDakov\Specification\SpecificationCollection;
+use VasilDakov\Specification\SpecificationCollectionIterator;
+use VasilDakov\Specification\SpecificationInterface;
 
 #[CoversClass(SpecificationCollectionIterator::class)]
 class SpecificationCollectionIteratorTest extends TestCase

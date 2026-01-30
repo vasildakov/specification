@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Vasildakov\Specification;
+namespace VasilDakov\Specification;
 
 use Countable;
-use ArrayIterator;
 use IteratorAggregate;
 use Traversable;
 
@@ -65,6 +64,9 @@ class SpecificationChain implements Countable, IteratorAggregate, SpecificationI
         return $result;
     }
 
+    /**
+     * @return Traversable<non-negative-int, SpecificationInterface>
+     */
     public function getIterator(): Traversable
     {
         return $this->specifications->getIterator();

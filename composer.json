@@ -17,12 +17,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Vasildakov\\Specification\\": "src/"
+            "VasilDakov\\Specification\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Vasildakov\\SpecificationTests\\": "tests/"
+            "VasilDakov\\SpecificationTests\\": "tests/"
         }
     },
     "require-dev": {

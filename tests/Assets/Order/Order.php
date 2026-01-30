@@ -1,6 +1,6 @@
 <?php
 
-namespace Vasildakov\SpecificationTests\Assets;
+namespace VasilDakov\SpecificationTests\Assets\Order;
 
 class Order
 {

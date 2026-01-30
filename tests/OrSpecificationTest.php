@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vasildakov\SpecificationTests;
+namespace VasilDakov\SpecificationTests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Vasildakov\Specification\OrSpecification;
-use Vasildakov\Specification\SpecificationInterface;
+use VasilDakov\Specification\OrSpecification;
+use VasilDakov\Specification\SpecificationInterface;
 
 #[CoversClass(OrSpecification::class)]
 final class OrSpecificationTest extends TestCase

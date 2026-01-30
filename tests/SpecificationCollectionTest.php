@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Vasildakov\SpecificationTests;
+namespace VasilDakov\SpecificationTests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Vasildakov\Specification\SpecificationCollection;
-use Vasildakov\Specification\SpecificationInterface;
-use Vasildakov\SpecificationTests\Assets\BoolSpecification;
+use VasilDakov\Specification\SpecificationCollection;
+use VasilDakov\Specification\SpecificationInterface;
+use VasilDakov\SpecificationTests\Assets\BoolSpecification;
 
 #[CoversClass(SpecificationCollection::class)]
 final class SpecificationCollectionTest extends TestCase

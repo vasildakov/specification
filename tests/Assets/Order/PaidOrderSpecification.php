@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Vasildakov\SpecificationTests\Assets;
+namespace VasilDakov\SpecificationTests\Assets\Order;
 
-use Vasildakov\Specification\Specification;
+use VasilDakov\Specification\Specification;
 
 /**
  * @extends Specification<Order>

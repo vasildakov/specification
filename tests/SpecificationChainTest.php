@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Vasildakov\SpecificationTests;
+namespace VasilDakov\SpecificationTests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Vasildakov\Specification\SpecificationChain;
-use Vasildakov\Specification\SpecificationCollection;
-use Vasildakov\Specification\SpecificationCollectionIterator;
-use Vasildakov\Specification\SpecificationInterface;
-use Vasildakov\Specification\UserInterface;
-use Vasildakov\Specification\UserSpecificationFactory;
-use Vasildakov\SpecificationTests\Assets\BoolSpecification;
+use VasilDakov\Specification\SpecificationChain;
+use VasilDakov\Specification\SpecificationCollection;
+use VasilDakov\Specification\SpecificationCollectionIterator;
+use VasilDakov\Specification\SpecificationInterface;
+use VasilDakov\Specification\UserInterface;
+use VasilDakov\Specification\UserSpecificationFactory;
+use VasilDakov\SpecificationTests\Assets\BoolSpecification;
 
 #[CoversClass(SpecificationChain::class)]
 final class SpecificationChainTest extends TestCase

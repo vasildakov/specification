@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vasildakov\Specification;
+namespace VasilDakov\Specification;
 
 /**
  * @template T of object

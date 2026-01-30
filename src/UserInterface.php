@@ -1,6 +1,6 @@
 <?php
 
-namespace Vasildakov\Specification;
+namespace VasilDakov\Specification;
 
 interface UserInterface
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vasildakov\Specification;
+namespace VasilDakov\Specification;
 
 /**
  * @template T of object
@@ -41,8 +41,21 @@ abstract class Specification implements SpecificationInterface
         return new NotSpecification($this);
     }
 
+    /**
+     * @param Specification<T> $specification
+     * @return AndNotSpecification<T>
+     */
     public function andNot(Specification $specification): AndNotSpecification
     {
         return new AndNotSpecification($this, $specification);
+    }
+
+    /**
+     * @param Specification<T> $specification
+     * @return OrNotSpecification<T>
+     */
+    public function orNot(Specification $specification): OrNotSpecification
+    {
+        return new OrNotSpecification($this, $specification);
     }
 }

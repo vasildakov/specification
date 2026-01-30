@@ -1,12 +1,14 @@
 <?php
 
-namespace Vasildakov\SpecificationTests;
+declare(strict_types=1);
+
+namespace VasilDakov\SpecificationTests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Vasildakov\Specification\AndSpecification;
-use Vasildakov\Specification\SpecificationInterface;
+use VasilDakov\Specification\AndSpecification;
+use VasilDakov\Specification\SpecificationInterface;
 
 #[CoversClass(AndSpecification::class)]
 class AndSpecificationTest extends TestCase

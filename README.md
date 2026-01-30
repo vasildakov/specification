@@ -50,6 +50,8 @@ This approach provides several benefits:
 - **Flexibility**: New specifications can be added without modifying existing code
 
 
+## Basic Example
+
 ```php 
 use VasilDakov\Specification\SpecificationChain;
 use VasilDakov\Specification\SpecificationInterface;

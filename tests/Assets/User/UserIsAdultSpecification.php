@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vasildakov\SpecificationTests\Assets;
+namespace VasilDakov\SpecificationTests\Assets\User;
 
-use Vasildakov\Specification\Specification;
-use Vasildakov\Specification\UserInterface;
+use VasilDakov\Specification\Specification;
+use VasilDakov\Specification\UserInterface;
 
 /**
  * @extends Specification<UserInterface>

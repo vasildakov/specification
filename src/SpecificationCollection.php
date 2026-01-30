@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vasildakov\Specification;
+namespace VasilDakov\Specification;
 
 use Countable;
 use IteratorAggregate;
@@ -56,6 +56,9 @@ final class SpecificationCollection implements IteratorAggregate, Countable
         return new SpecificationCollectionIterator($this);
     }
 
+    /**
+     * @return int
+     */
     public function count(): int
     {
         return count($this->specifications);

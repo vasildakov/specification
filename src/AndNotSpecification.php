@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vasildakov\Specification;
+namespace VasilDakov\Specification;
 
 /**
  * @template T
@@ -37,7 +37,7 @@ final class AndNotSpecification extends Specification
     public function isSatisfiedBy(object $object): bool
     {
         // true and false
-        return $this->one()->isSatisfiedBy($object) && !$this->other()->isSatisfiedBy($object);
+        return $this->one()->isSatisfiedBy($object) && ! $this->other()->isSatisfiedBy($object);
     }
 
     /**

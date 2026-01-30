@@ -2,23 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Vasildakov\SpecificationTests;
+namespace VasilDakov\SpecificationTests;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use stdClass;
-use Vasildakov\Specification\AnyOfSpecification;
-use Vasildakov\Specification\NoneOfSpecification;
-use Vasildakov\Specification\OneOfSpecification;
-use Vasildakov\Specification\UserInterface;
-use Vasildakov\SpecificationTests\Assets\BoolSpecification;
-use Vasildakov\SpecificationTests\Assets\CancelledOrderSpecification;
-use Vasildakov\SpecificationTests\Assets\Order;
-use Vasildakov\SpecificationTests\Assets\PaidOrderSpecification;
-use Vasildakov\SpecificationTests\Assets\UnshippedOrderSpecification;
-use Vasildakov\SpecificationTests\Assets\UserIsAdultSpecification;
-use Vasildakov\SpecificationTests\Assets\UserIsGermanSpecification;
-use Vasildakov\SpecificationTests\Assets\UserIsMaleSpecification;
+use VasilDakov\Specification\AnyOfSpecification;
+use VasilDakov\Specification\NoneOfSpecification;
+use VasilDakov\Specification\OneOfSpecification;
+use VasilDakov\Specification\UserInterface;
+use VasilDakov\SpecificationTests\Assets\BoolSpecification;
+use VasilDakov\SpecificationTests\Assets\Order\CancelledOrderSpecification;
+use VasilDakov\SpecificationTests\Assets\Order\Order;
+use VasilDakov\SpecificationTests\Assets\Order\PaidOrderSpecification;
+use VasilDakov\SpecificationTests\Assets\Order\UnshippedOrderSpecification;
+use VasilDakov\SpecificationTests\Assets\User\InMemoryUserRepository;
+use VasilDakov\SpecificationTests\Assets\User\UserIsAdultSpecification;
+use VasilDakov\SpecificationTests\Assets\User\UserIsGermanSpecification;
+use VasilDakov\SpecificationTests\Assets\User\UserIsMaleSpecification;
 
 class SpecificationTest extends TestCase
 {
@@ -117,19 +118,32 @@ class SpecificationTest extends TestCase
     }
 
     #[Test]
-    public function testUsageWithOrder(): void
+    public function itCombinesOrderSpecificationsUsingLogicalOperators(): void
     {
         $paid      = new PaidOrderSpecification();
         $unshipped = new UnshippedOrderSpecification();
         $cancelled = new CancelledOrderSpecification();
 
-        self::assertTrue($paid->and($unshipped)->isSatisfiedBy(new Order())); // => true
-        self::assertTrue($paid->andNot($cancelled)->and($unshipped)->isSatisfiedBy(new Order())); // => true
+        self::assertTrue(
+            $paid->and($unshipped)
+                 ->and($unshipped)
+                 ->isSatisfiedBy(new Order())
+        ); // => true
+
+        self::assertTrue(
+            $paid->andNot($cancelled)
+                ->and($unshipped)
+                ->isSatisfiedBy(new Order())
+        ); // => true
 
         $composite = new OneOfSpecification($paid, $unshipped, $cancelled);
         self::assertTrue($composite->isSatisfiedBy(new Order())); // => true
 
-        self::assertTrue($paid->and($unshipped)->andNot($cancelled)->isSatisfiedBy(new Order()));
+        self::assertTrue(
+            $paid->and($unshipped)
+                ->andNot($cancelled)
+                ->isSatisfiedBy(new Order())
+        );
     }
 
     #[Test]
@@ -143,10 +157,43 @@ class SpecificationTest extends TestCase
 
         $composite = new AnyOfSpecification($adult, $german, $male);
 
-        self::assertFalse($composite->isSatisfiedBy($user)); // false, user is an adult male, but not German
-        self::assertTrue($adult->isSatisfiedBy($user)); // true, user is adult
-        self::assertFalse($adult->and($german)->and($male)->isSatisfiedBy($user)); // false, user is not german
+        $this->assertFalse($composite->isSatisfiedBy($user)); // false, user is an adult male, but not German
+        $this->assertTrue($adult->isSatisfiedBy($user)); // true, user is adult
+        $this->assertFalse($adult->and($german)->and($male)->isSatisfiedBy($user)); // false, user is not german
     }
+
+    #[Test]
+    public function itFindsUsersSatisfyingAnySpecification(): void
+    {
+        $repository = new InMemoryUserRepository();
+
+        $composite = new AnyOfSpecification(
+            new UserIsAdultSpecification(),
+            new UserIsGermanSpecification(),
+            new UserIsMaleSpecification(),
+        );
+
+        $result = $repository->findBySpecification($composite);
+        $this->assertCount(2, $result);
+    }
+
+    #[Test]
+    public function itCombinesSpecificationsUsingOrNotOperator(): void
+    {
+        $trueSpec  = new BoolSpecification(true);
+        $falseSpec = new BoolSpecification(false);
+
+        $trueOrNotTrueSpec   = $trueSpec->orNot($trueSpec);
+        $falseOrNotFalseSpec = $falseSpec->orNot($falseSpec);
+        $trueOrNotFalseSpec  = $trueSpec->orNot($falseSpec);
+        $falseOrNotTrueSpec  = $falseSpec->orNot($trueSpec);
+
+        $this->assertTrue($trueOrNotTrueSpec->isSatisfiedBy(new stdClass()));
+        $this->assertTrue($falseOrNotFalseSpec->isSatisfiedBy(new stdClass()));
+        $this->assertTrue($trueOrNotFalseSpec->isSatisfiedBy(new stdClass()));
+        $this->assertFalse($falseOrNotTrueSpec->isSatisfiedBy(new stdClass()));
+    }
+
 
     #[Test]
     private static function userFactory(string $country, int $age, string $gender): UserInterface
