@@ -1,7 +1,7 @@
 # PHP Specification Design Pattern
 
 
-[![build](https://github.com/vasildakov/specification/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/vasildakov/mezzio-doctrine/actions/workflows/ci.yml)
+[![build](https://github.com/vasildakov/specification/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/vasildakov/specification/actions/workflows/build.yml)
 [![Coverage Status](https://coveralls.io/repos/github/vasildakov/specification/badge.svg?branch=main)](https://coveralls.io/github/vasildakov/specification?branch=main)
 ## Specification
 
